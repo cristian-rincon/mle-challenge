@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "mle-challenge"
+version = "0.1.0"
+description = ""
+authors = ["cristian-rincon <cristian.o.rincon.b@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "app"}]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+pandas = "^2.2.3"
+scikit-learn = "^1.5.2"
+fastapi = "^0.115.0"
+joblib = "^1.4.2"
+loguru = "^0.7.2"
+uvicorn = "^0.31.0"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^24.8.0"
+pre-commit = "^4.0.0"
+isort = "^5.13.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

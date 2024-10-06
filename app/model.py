@@ -7,7 +7,7 @@ from sklearn.impute import SimpleImputer
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 
-from app.settings import MODEL_PATH
+from settings import MODEL_PATH
 
 
 def load_data():

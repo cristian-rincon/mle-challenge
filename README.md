@@ -1,5 +1,21 @@
 # Machine Learning Engineering Assignment
 
+- [Machine Learning Engineering Assignment](#machine-learning-engineering-assignment)
+  - [Assignment](#assignment)
+  - [Proposed Solution](#proposed-solution)
+    - [FastAPI Loan Approval Prediction API](#fastapi-loan-approval-prediction-api)
+      - [Features](#features)
+    - [Project Structure](#project-structure)
+    - [Requirements](#requirements)
+    - [Running the Application](#running-the-application)
+      - [Option 1: Using Docker Compose (recommended)](#option-1-using-docker-compose-recommended)
+      - [Option 2: Running with Docker directly](#option-2-running-with-docker-directly)
+      - [Option 3: Running without Docker](#option-3-running-without-docker)
+    - [API Endpoints](#api-endpoints)
+    - [Notes](#notes)
+    - [License](#license)
+    - [Explanation](#explanation)
+
 This assignment is expected to be completed by a Machine Learning Engineer within 3-4 hours.
 
 ## Assignment
@@ -34,12 +50,12 @@ version=0.0.3
 
 Here’s a `README.md` file that documents how to set up and run your FastAPI application using Docker and Docker Compose:
 
-```markdown
 ### FastAPI Loan Approval Prediction API
 
 This project is a FastAPI-based application that predicts loan approval based on various user inputs. It uses machine learning (Logistic Regression) to provide predictions.
 
 #### Features
+
 - Predict loan approval based on input features such as age, annual income, credit score, loan amount, loan duration, and more.
 - Containerized using Docker for easy deployment.
 - Uses Poetry as the Python dependency manager.

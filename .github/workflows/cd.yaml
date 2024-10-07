@@ -36,6 +36,6 @@ jobs:
           push: true
           tags: |
             cristian-rincon/loans-api:latest
-            cristian-rincon/loans-api:{{ github.ref }}
+            cristian-rincon/loans-api:${{ steps.meta.outputs.tags }}
             ghcr.io/cristian-rincon/loans-api:latest
-            ghcr.io/cristian-rincon/loans-api:{{ github.ref }}
+            ghcr.io/cristian-rincon/loans-api:${{ steps.meta.outputs.tags }}

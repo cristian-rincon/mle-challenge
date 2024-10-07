@@ -1,5 +1,6 @@
 import pytest
 from fastapi.testclient import TestClient
+from unittest.mock import patch, MagicMock
 from app.api import loans_api
 
 # Initialize the test client
@@ -23,12 +24,17 @@ valid_loan_application = {
     "Loan_Approval": 1  # Although this field is not required for prediction
 }
 
-# Test for valid prediction
-def test_predict_valid_loan():
+# Test for valid prediction using a mocked model
+@patch("app.api.model.predict")
+def test_predict_valid_loan(mock_predict):
+    # Mock the model's prediction to always return [1]
+    mock_predict.return_value = [1]
+
     response = client.post("/predict", json=valid_loan_application)
     assert response.status_code == 200
     assert "Loan_Approval" in response.json()
     assert isinstance(response.json()["Loan_Approval"], int)
+    assert response.json()["Loan_Approval"] == 1  # Assert that the mocked result is returned
 
 # Test for missing field (should fail with validation error)
 def test_predict_invalid_missing_field():

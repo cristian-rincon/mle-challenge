@@ -1,0 +1,74 @@
+name: CI for FastAPI Loan Approval API
+
+# Trigger the workflow on push or pull requests
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+      - develop
+
+# Define the jobs that will run as part of the workflow
+jobs:
+  test:
+    # Define the virtual environment
+    runs-on: ubuntu-latest
+
+    # Define the steps in the job
+    steps:
+      # Checkout the code from the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Set up Python
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
+
+      # Cache Poetry dependencies
+      - name: Cache Poetry dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cache/pypoetry
+            ~/.virtualenvs
+          key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-poetry-
+
+      # Install Poetry
+      - name: Install Poetry
+        run: curl -sSL https://install.python-poetry.org | python3 -
+
+      # Install dependencies with Poetry
+      - name: Install dependencies
+        run: poetry install --no-interaction --no-ansi
+
+      # Run Linting using Flake8
+      - name: Lint with flake8
+        run: poetry run flake8 app tests
+
+      # Run tests with pytest
+      - name: Run tests with pytest
+        run: poetry run pytest --cov=app --cov-report=xml
+
+  # Coverage Reporting (optional, for codecov)
+  coverage:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./coverage.xml
+          flags: unittests
+          name: codecov-umbrella
+          fail_ci_if_error: true

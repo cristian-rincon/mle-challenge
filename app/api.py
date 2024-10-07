@@ -15,10 +15,9 @@ loans_api = FastAPI(
     version="0.1",
 )
 
-# Load the saved model
-logger.info(f"Loading model from {MODEL_PATH}")
 # Lazy load model (only when needed)
 def get_model():
+    logger.info(f"Loading model from {MODEL_PATH}")
     return joblib.load(MODEL_PATH)
 
 

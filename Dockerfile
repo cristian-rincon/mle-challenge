@@ -29,3 +29,12 @@ RUN poetry install --no-dev
 
 # Step 9: Run model.py script (for model training)
 RUN python /app/model.py
+
+# Final Stage: Running the FastAPI app (this stage is only used if not using docker-compose)
+FROM base AS final
+
+# Expose the port for FastAPI
+EXPOSE 8000
+
+# Command to run the FastAPI application
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]

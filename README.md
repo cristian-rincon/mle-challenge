@@ -1,5 +1,7 @@
 # Machine Learning Engineering Assignment
 
+[![CI for FastAPI Loan Approval API](https://github.com/cristian-rincon/mle-challenge/actions/workflows/ci.yaml/badge.svg)](https://github.com/cristian-rincon/mle-challenge/actions/workflows/ci.yaml)
+
 - [Machine Learning Engineering Assignment](#machine-learning-engineering-assignment)
   - [Assignment](#assignment)
   - [Proposed Solution](#proposed-solution)

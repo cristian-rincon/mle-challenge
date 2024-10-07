@@ -52,7 +52,7 @@ This project is a FastAPI-based application that predicts loan approval based on
 ├── app/                    # Application source code
 │   ├── data/               # Dataset folder
 │   ├── model.py            # Model training script
-│   ├── app.py              # FastAPI application
+│   ├── api.py              # FastAPI application
 │   ├── pyproject.toml      # Poetry configuration file
 │   └── poetry.lock         # Poetry lock file
 ├── Dockerfile              # Dockerfile for building the app

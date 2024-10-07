@@ -3,11 +3,10 @@ import os
 import joblib
 import pandas as pd
 from loguru import logger
+from settings import MODEL_PATH
 from sklearn.impute import SimpleImputer
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
-
-from settings import MODEL_PATH
 
 
 def load_data():

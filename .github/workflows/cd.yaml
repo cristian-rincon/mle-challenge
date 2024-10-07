@@ -1,9 +1,8 @@
 name: CI/CD Pipeline
 
 on:
-  push:
-    branches:
-      - main  # Change this to your primary branch
+  release:
+    types: [published]
 
 jobs:
   build-and-store:

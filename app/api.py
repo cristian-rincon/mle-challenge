@@ -15,11 +15,11 @@ loans_api = FastAPI(
     version="0.1",
 )
 
+
 # Lazy load model (only when needed)
 def get_model():
     logger.info(f"Loading model from {MODEL_PATH}")
     return joblib.load(MODEL_PATH)
-
 
 
 # Define the request body using Pydantic

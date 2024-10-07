@@ -52,11 +52,12 @@ This project is a FastAPI-based application that predicts loan approval based on
 ├── app/                    # Application source code
 │   ├── data/               # Dataset folder
 │   ├── model.py            # Model training script
-│   ├── api.py              # FastAPI application
-│   ├── pyproject.toml      # Poetry configuration file
-│   └── poetry.lock         # Poetry lock file
+│   ├── settings.py         # Application Core Settings
+│   └── api.py              # FastAPI application
 ├── Dockerfile              # Dockerfile for building the app
 ├── docker-compose.yml      # Docker Compose configuration
+├── pyproject.toml          # Poetry configuration file
+├── poetry.lock             # Poetry lock file
 └── README.md               # Project documentation
 ```
 
@@ -79,13 +80,13 @@ This project is a FastAPI-based application that predicts loan approval based on
 
    Open your browser or API tool (e.g., Postman) and navigate to:
 
-   ```
+   ```bash
    http://localhost:8000
    ```
 
    The FastAPI app will be running on port `8000`. You can also access the interactive Swagger documentation at:
 
-   ```
+   ```bash
    http://localhost:8000/docs
    ```
 
@@ -164,7 +165,7 @@ This project is a FastAPI-based application that predicts loan approval based on
 3. **Run the FastAPI app**:
 
    ```bash
-   poetry run uvicorn app:app --reload
+   poetry run uvicorn app.api:loans_api --reload
    ```
 
 4. **Access the API**:

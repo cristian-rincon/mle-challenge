@@ -7,10 +7,15 @@
       - [Features](#features)
     - [Project Structure](#project-structure)
     - [Requirements](#requirements)
-    - [Running the Application](#running-the-application)
-      - [Option 1: Using Docker Compose (recommended)](#option-1-using-docker-compose-recommended)
-      - [Option 2: Running with Docker directly](#option-2-running-with-docker-directly)
-      - [Option 3: Running without Docker](#option-3-running-without-docker)
+    - [Building and Running the Application](#building-and-running-the-application)
+      - [Steps to Trigger CI/CD](#steps-to-trigger-cicd)
+      - [Pulling the Docker Image from GitHub Packages Registry](#pulling-the-docker-image-from-github-packages-registry)
+      - [Authentication](#authentication)
+      - [Running Tests](#running-tests)
+      - [\[Running from local\] Option 1: Using Docker Compose (recommended)](#running-from-local-option-1-using-docker-compose-recommended)
+      - [\[Running from local\] Option 2: Running with Docker directly](#running-from-local-option-2-running-with-docker-directly)
+      - [\[Running from local\] Option 3: Running without Docker](#running-from-local-option-3-running-without-docker)
+    - [Key Points in the Documentation](#key-points-in-the-documentation)
     - [API Endpoints](#api-endpoints)
     - [Notes](#notes)
     - [License](#license)
@@ -82,9 +87,42 @@ This project is a FastAPI-based application that predicts loan approval based on
 - **Docker**: Install Docker from [here](https://docs.docker.com/get-docker/).
 - **Docker Compose**: Install Docker Compose from [here](https://docs.docker.com/compose/install/).
 
-### Running the Application
+### Building and Running the Application
 
-#### Option 1: Using Docker Compose (recommended)
+If you want to build and upload the Docker image to GitHub Packages, use the GitHub Actions CI/CD pipeline provided in the `.github/workflows/cd.yml` file.
+
+#### Steps to Trigger CI/CD
+
+1. Make changes to your code and push them to the `main` branch.
+2. The CI/CD pipeline will build the Docker image and save it as an artifact.
+
+#### Pulling the Docker Image from GitHub Packages Registry
+
+Once the image is built and pushed to the GitHub Packages Registry, you can pull it using the following command:
+
+```bash
+docker pull ghcr.io/cristian-rincon/loans-api:latest
+```
+
+#### Authentication
+
+To pull images from the GitHub Packages Registry, you may need to authenticate using your GitHub Personal Access Token. You can log in using the following command:
+
+```bash
+echo <YOUR_PERSONAL_ACCESS_TOKEN> | docker login ghcr.io -u <YOUR_GITHUB_USERNAME> --password-stdin
+```
+
+Replace `<YOUR_PERSONAL_ACCESS_TOKEN>` with your actual token.
+
+#### Running Tests
+
+To run the tests for the API, use the following command:
+
+```bash
+poetry run pytest
+```
+
+#### [Running from local] Option 1: Using Docker Compose (recommended)
 
 1. **Build and run the application using Docker Compose**:
 
@@ -114,7 +152,7 @@ This project is a FastAPI-based application that predicts loan approval based on
    docker-compose down
    ```
 
-#### Option 2: Running with Docker directly
+#### [Running from local] Option 2: Running with Docker directly
 
 1. **Build the Docker image**:
 
@@ -156,7 +194,7 @@ This project is a FastAPI-based application that predicts loan approval based on
    docker stop <container-id>
    ```
 
-#### Option 3: Running without Docker
+#### [Running from local] Option 3: Running without Docker
 
 1. **Install dependencies**:
 
@@ -197,6 +235,16 @@ This project is a FastAPI-based application that predicts loan approval based on
    ```bash
    http://localhost:8000/docs
    ```
+
+### Key Points in the Documentation
+
+- **Pulling the Docker Image**: Clear instructions on how to pull the Docker image from GitHub Packages, including the necessary commands.
+  
+- **Authentication**: Guidance on authenticating to GitHub Packages using a Personal Access Token, as this may be necessary to pull images.
+
+- **Example Command**: Providing an example pull command helps clarify the process for users.
+
+This additional documentation will help users understand how to access and use the Docker image from GitHub Packages Registry effectively. Let me know if you need any further adjustments!
 
 ### API Endpoints
 

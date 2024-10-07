@@ -55,6 +55,10 @@ jobs:
       # Run tests with pytest
       - name: Run tests with pytest
         run: poetry run pytest --cov=app --cov-report=xml
+    
+      # Upload coverage to Codecov
+      - name: Upload coverage to Codecov
+        run: bash <(curl -s https://codecov.io/bash) -t ${{ secrets.CODECOV_TOKEN }} -f coverage.xml -F unittests -n codecov-umbrella
 
   # Coverage Reporting (optional, for codecov)
   coverage:

@@ -1,5 +1,5 @@
 # Step 1: Use a lightweight base image
-FROM python:3.11-slim AS base
+FROM python:3.11-slim AS final
 
 # Step 2: Set environment variables for Poetry
 ENV POETRY_VERSION=1.8.2 \
@@ -25,13 +25,10 @@ COPY ./pyproject.toml ./poetry.lock* /
 COPY ./app /app
 
 # Step 8: Install dependencies
-RUN poetry install --no-dev
+RUN poetry install --only main
 
 # Step 9: Run model.py script (for model training)
 RUN python /app/model.py
-
-# Final Stage: Running the FastAPI app (this stage is only used if not using docker-compose)
-FROM base AS final
 
 # Expose the port for FastAPI
 EXPOSE 8000

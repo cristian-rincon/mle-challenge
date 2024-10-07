@@ -2,6 +2,7 @@ import joblib
 import pandas as pd
 from fastapi import FastAPI
 from fastapi.responses import RedirectResponse
+from loguru import logger
 from pydantic import BaseModel
 from sklearn.impute import SimpleImputer
 
@@ -15,7 +16,11 @@ loans_api = FastAPI(
 )
 
 # Load the saved model
-model = joblib.load(MODEL_PATH)
+logger.info(f"Loading model from {MODEL_PATH}")
+# Lazy load model (only when needed)
+def get_model():
+    return joblib.load(MODEL_PATH)
+
 
 
 # Define the request body using Pydantic
@@ -45,6 +50,9 @@ def predict_loan(loan_app: LoanApplication):
     # Impute missing values (if any)
     imputer = SimpleImputer(fill_value=0)
     input_data_imputed = imputer.fit_transform(input_data)
+
+    # Load the model
+    model = get_model()
 
     # Predict using the trained model
     prediction = model.predict(input_data_imputed)
